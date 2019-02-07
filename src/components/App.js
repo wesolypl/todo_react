@@ -12,6 +12,7 @@ class App extends Component {
       date: "",
       priority: false
     },
+    taskCounter: 3,
     currentTasksList: [
       {
         date: "2019-02-16",
@@ -24,9 +25,7 @@ class App extends Component {
         id: 1,
         priority: false,
         value: "Pomalować dom"
-      }
-    ],
-    doneTasksList: [
+      },
       {
         date: "2019-02-08",
         doneDate: "6.02.2019, 18:42:35",
@@ -41,11 +40,13 @@ class App extends Component {
         priority: false,
         value: "Sprzedać butelki po piwie"
       }
-    ]
+    ],
+    doneTasksList: []
   };
   handleInput = e => {
     const newTask = this.state.newTask;
-    newTask.id = this.state.currentTasksList.length;
+    const taskCounter = this.state.taskCounter;
+    newTask.id = taskCounter + 1;
     if (e.target.name === "priority") {
       newTask[e.target.name] = e.target.checked;
     } else {
@@ -58,18 +59,20 @@ class App extends Component {
   handleAddNewTask = e => {
     e.preventDefault();
     if (this.state.newTask.value === "") {
-      return alert("error");
+      return alert("Zadanie musi mieć treść!");
     }
     const newTask = this.state.newTask;
     const currentTasksList = this.state.currentTasksList;
     currentTasksList.push(newTask);
+    const taskCounter = newTask.id;
     this.setState({
       newTask: {
         id: null,
         value: "",
         date: "",
         priority: false
-      }
+      },
+      taskCounter
     });
   };
   handleAddDoneTask = e => {
@@ -107,6 +110,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <h1 className="title">TODO APP</h1>
         <Form
           handleAddNewTask={this.handleAddNewTask}
           handleInput={this.handleInput}

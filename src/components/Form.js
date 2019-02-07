@@ -4,18 +4,20 @@ const Form = props => {
   return (
     <form>
       <label>
-        Nowe zadanie:{" "}
         <input
           type="text"
           name="value"
+          placeholder="Nowe zadanie"
           value={props.newTask.value}
           onChange={props.handleInput}
         />
       </label>
       <label>
+        <span />
         <input
           type="checkbox"
           name="priority"
+          className="checkbox"
           checked={props.newTask.priority}
           onChange={props.handleInput}
         />
@@ -30,7 +32,9 @@ const Form = props => {
           onChange={props.handleInput}
         />
       </label>
-      <button onClick={props.handleAddNewTask}>Dodaj</button>
+      <button onClick={props.handleAddNewTask} className="btn-add">
+        Dodaj
+      </button>
     </form>
   );
 };

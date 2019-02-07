@@ -7,10 +7,18 @@ const List = props => {
         {element.value}
       </span>
       {element.date !== "" ? ` | do ${element.date}` : ""}{" "}
-      <button value={element.id} onClick={props.handleAddDoneTask}>
+      <button
+        value={element.id}
+        onClick={props.handleAddDoneTask}
+        className="btn-done"
+      >
         Zrobione
       </button>{" "}
-      <button value={element.id} onClick={props.handleDeleteTask}>
+      <button
+        value={element.id}
+        onClick={props.handleDeleteTask}
+        className="btn-delete"
+      >
         X
       </button>
     </li>
@@ -18,7 +26,14 @@ const List = props => {
 
   return (
     <div className="currentTasks">
-      <h1>Aktualne zadania</h1>
+      <h2>
+        Aktualne zadania
+        <span>
+          {props.currentTasksList.length > 0
+            ? `(${props.currentTasksList.length})`
+            : ""}
+        </span>
+      </h2>
       <ul>{elements}</ul>
     </div>
   );

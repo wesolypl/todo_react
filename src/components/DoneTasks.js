@@ -7,7 +7,11 @@ const DoneTasks = props => {
       {element.date !== "" ? ` (zrobić do ${element.date})` : ""}
       <p>
         - Potwierdzono wykonianie {element.doneDate}{" "}
-        <button value={element.id} onClick={props.handleDeleteDoneTask}>
+        <button
+          value={element.id}
+          onClick={props.handleDeleteDoneTask}
+          className="btn-delete"
+        >
           X
         </button>
       </p>
@@ -15,7 +19,14 @@ const DoneTasks = props => {
   ));
   return (
     <div className="doneTasks">
-      <h2>Wykonane zadania</h2>
+      <h2>
+        Wykonane zadania
+        <span>
+          {props.doneTasksList.length > 0
+            ? `(${props.doneTasksList.length})`
+            : ""}
+        </span>
+      </h2>
       <ul>{elements}</ul>
     </div>
   );
