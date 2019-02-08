@@ -62,10 +62,11 @@ class App extends Component {
       return alert("Zadanie musi mieć treść!");
     }
     const newTask = this.state.newTask;
-    const currentTasksList = this.state.currentTasksList;
+    const currentTasksList = [...this.state.currentTasksList];
     currentTasksList.push(newTask);
     const taskCounter = newTask.id;
     this.setState({
+      currentTasksList,
       newTask: {
         id: null,
         value: "",
@@ -77,12 +78,12 @@ class App extends Component {
   };
   handleAddDoneTask = e => {
     const id = parseInt(e.target.value);
-    const currentTasksList = this.state.currentTasksList;
+    const currentTasksList = [...this.state.currentTasksList];
     const doneTask = currentTasksList.find(task => task.id === id);
     doneTask.doneDate = new Date().toLocaleString();
     const index = currentTasksList.findIndex(task => task.id === id);
     currentTasksList.splice(index, 1);
-    const doneTasksList = this.state.doneTasksList;
+    const doneTasksList = [...this.state.doneTasksList];
     doneTasksList.push(doneTask);
     this.setState({
       doneTasksList,
@@ -91,7 +92,7 @@ class App extends Component {
   };
   handleDeleteTask = e => {
     const id = parseInt(e.target.value);
-    const currentTasksList = this.state.currentTasksList;
+    const currentTasksList = [...this.state.currentTasksList];
     const index = currentTasksList.findIndex(task => task.id === id);
     currentTasksList.splice(index, 1);
     this.setState({
@@ -100,7 +101,7 @@ class App extends Component {
   };
   handleDeleteDoneTask = e => {
     const id = parseInt(e.target.value);
-    const doneTasksList = this.state.doneTasksList;
+    const doneTasksList = [...this.state.doneTasksList];
     const index = doneTasksList.findIndex(task => task.id === id);
     doneTasksList.splice(index, 1);
     this.setState({
